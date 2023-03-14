@@ -13,6 +13,12 @@ var usersRouter = require("./routes/users");
 
 var app = express();
 
+const mongoDB = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@cluster0.ewbvlsz.mongodb.net/?retryWrites=true&w=majority`;
+mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
+const db = mongoose.connection;
+
+db.on("error", console.bind(console, "MongoDB connection error: "));
+
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
