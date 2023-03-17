@@ -13,6 +13,7 @@ require("dotenv").config();
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
+
 const User = require("./models/user");
 
 var app = express();
