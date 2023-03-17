@@ -7,6 +7,8 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcryptjs");
+const session = require("express-session");
+const MongoStore = require("connect-mongo");
 require("dotenv").config();
 
 var indexRouter = require("./routes/index");
@@ -19,7 +21,7 @@ const mongoDB = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 
-db.on("error", console.bind(console, "MongoDB connection error: "));
+db.on("error", console.error.bind(console, "MongoDB connection error: "));
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -31,7 +33,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use(
+passport.use(
   new LocalStrategy(async (username, password, done) => {
     try {
       const user = await User.findOne({ username: username }).exec();
@@ -64,11 +66,12 @@ passport.deserializeUser(async (user, done) => {
   }
 });
 
-express.use(
+app.use(
   session({
     secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitiated: true,
+    saveUninitialized: true,
+    store: MongoStore.create({ mongoUrl: mongoDB }),
   })
 );
 
