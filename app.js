@@ -5,16 +5,12 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const mongoose = require("mongoose");
 const passport = require("passport");
-const LocalStrategy = require("passport-local").Strategy;
-const bcrypt = require("bcryptjs");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
 require("dotenv").config();
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
-
-const User = require("./models/user");
 
 var app = express();
 
@@ -34,38 +30,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-passport.use(
-  new LocalStrategy(async (username, password, done) => {
-    try {
-      const user = await User.findOne({ username: username }).exec();
-      if (!user) {
-        return done(null, false, { message: "Incorrect username or password" });
-      }
-      const res = await bcrypt.compare(user.password, password);
-
-      if (!res) {
-        return done(null, false, { message: "Incorrect username or password" });
-      }
-
-      return done(null, user);
-    } catch (err) {
-      return done(err);
-    }
-  })
-);
-
-passport.serializeUser((user, done) => {
-  return done(null, user.id);
-});
-
-passport.deserializeUser(async (user, done) => {
-  try {
-    const user = await User.findById(user);
-    return done(null, user);
-  } catch (err) {
-    return done(err, null);
-  }
-});
+require("./helpers/authentication");
 
 app.use(
   session({
