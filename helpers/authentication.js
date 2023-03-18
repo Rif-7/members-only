@@ -21,6 +21,10 @@ const validatePassword = async (username, password, done) => {
   }
 };
 
+exports.createHash = async (password) => {
+  return await bcrypt.hash(password, 10);
+};
+
 passport.use(new LocalStrategy(validatePassword));
 
 passport.serializeUser((user, done) => {
