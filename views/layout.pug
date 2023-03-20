@@ -4,4 +4,26 @@ html
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
+    nav 
+      a(href="/").header Members Only
+      if currentUser 
+        ul 
+          li.greeting Hello, #{currentUser.username}
+          if currentUser.isMember 
+            li
+              a(href="revoke-membership") Revoke Membership 
+          else 
+            li
+              a(href="membership") Be a Member
+          
+          if !currentUser.isAdmin
+            li
+              a(href="admin") Be an Admin
+
+      else 
+        ul 
+          li 
+            a(href="login") Login
+          li 
+            a(href="sign-up") Sign Up 
     block content

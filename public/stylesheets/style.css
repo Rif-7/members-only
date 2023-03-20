@@ -1,8 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Mono&display=swap');
+
+
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin: 0px;
 }
 
 a {
-  color: #00B7FF;
+  text-decoration: none;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  font-family: "Bebas Neue", sans-serif;
+  color: black;
+  padding-left: 40px;
+  padding-right: 40px;
+  background-color: antiquewhite;
+  box-shadow: 5px 5px 10px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 18px;
+  font-size: 24px;
+}
+
+nav ul li a {
+  color: black;
+  text-decoration: underline;
+
+}
+
+
+.greeting {
+  color: #094074;
+}
+
+.header {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 35px;
+  color: black;
 }
