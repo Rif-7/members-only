@@ -1,8 +1,9 @@
 const User = require("../models/user");
 const { body, validationResult } = require("express-validator");
 const { createHash } = require("../helpers/authentication");
+const passport = require("passport");
 
-exports.createUser = [
+exports.sign_up_post = [
   body("username", "Username is required (4-18 characters) ")
     .trim()
     .isLength({ min: 4, max: 18 })
@@ -59,3 +60,20 @@ exports.createUser = [
     }
   },
 ];
+
+exports.sign_up_get = (req, res, next) => {
+  return res.render("sign-up-form", { title: "Create Account " });
+};
+
+exports.login_get = (req, res, next) => {
+  return res.render("login-form", {
+    title: "Login ",
+    error: req.session.messages,
+  });
+};
+
+exports.login_post = passport.authenticate("local", {
+  successRedirect: "/",
+  failureRedirect: "/login",
+  failureFlash: true,
+});
