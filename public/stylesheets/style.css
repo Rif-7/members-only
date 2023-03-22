@@ -3,6 +3,7 @@
 
 body {
   margin: 0px;
+  background-color: #F4F4F9;
 }
 
 a {
@@ -35,7 +36,6 @@ nav ul li a {
 
 }
 
-
 .greeting {
   color: #094074;
 }
@@ -44,4 +44,58 @@ nav ul li a {
   font-family: "Bebas Neue", sans-serif;
   font-size: 35px;
   color: black;
+}
+
+.form_container {
+  margin: 30px auto 30px;
+  padding: 10px;
+  width: 400px;
+  min-height: 500px;
+  box-shadow: 5px 5px 8px black;
+  font-family: "Roboto Mono", monospace;
+
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.form_container h1 {
+  font-family: "Bebas Neue", sans-serif;
+}
+
+.form_main {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+}
+
+.form_container button {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 22px;
+}
+
+.form_container button:hover {
+  background-color: #e7e7e7;
+}
+
+.form_group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form_group input {
+  width: 250px;
+  height: 25px;
+  border: none;
+  border-bottom: 3px solid black;
+}
+
+.form_group input:focus {
+  background-color: #e7e7e7;
+  outline: none;
 }

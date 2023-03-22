@@ -3,6 +3,10 @@ const { body, validationResult } = require("express-validator");
 const { createHash } = require("../helpers/authentication");
 const passport = require("passport");
 
+exports.sign_up_get = (req, res, next) => {
+  return res.render("sign-up-form", { title: "Create Account " });
+};
+
 exports.sign_up_post = [
   body("username", "Username is required (4-18 characters) ")
     .trim()
@@ -36,7 +40,7 @@ exports.sign_up_post = [
         lastname: req.body.lastname,
         password: req.body.password,
       });
-      return res.render("sign_up_form", {
+      return res.render("sign-up-form", {
         title: "Create account",
         user: user,
         errors: errors.array(),
@@ -45,25 +49,24 @@ exports.sign_up_post = [
 
     try {
       const passwordHash = await createHash(req.body.password);
-      const user = new User({
+      const user = await new User({
         username: req.body.username,
         firstname: req.body.firstname,
         lastname: req.body.lastname,
         password: passwordHash,
-      });
+      }).save();
 
-      await user.save();
-      await req.login(user);
-      res.redirect("/");
+      // Can't use async/await for req.login
+      // TODO: use util.promisify to make req.login return a promise
+      await req.login(user, (err) => {
+        if (err) return next(err);
+        return res.redirect("/");
+      });
     } catch (err) {
       return next(err);
     }
   },
 ];
-
-exports.sign_up_get = (req, res, next) => {
-  return res.render("sign-up-form", { title: "Create Account " });
-};
 
 exports.login_get = (req, res, next) => {
   return res.render("login-form", {
@@ -77,3 +80,12 @@ exports.login_post = passport.authenticate("local", {
   failureRedirect: "/login",
   failureFlash: true,
 });
+
+exports.logout = (req, res, next) => {
+  // Can't use async/await for req.logout
+  // TODO: use util.promisify to make req.logout return a promise
+  req.logout((err) => {
+    if (err) return next(err);
+    return res.redirect("/");
+  });
+};
