@@ -4,15 +4,22 @@ const bcrypt = require("bcryptjs");
 const User = require("../models/user");
 
 const validatePassword = async (username, password, done) => {
+  console.log("here");
   try {
-    const user = await User.findOne({ username: username }).exec();
+    const user = await User.findOne({ username: username });
     if (!user) {
-      return done(null, false, { message: "Incorrect username or password" });
+      return done(null, false, {
+        type: "SignUpMessage",
+        message: "Incorrect username or password",
+      });
     }
-    const res = await bcrypt.compare(user.password, password);
+    const res = await bcrypt.compare(password, user.password);
 
     if (!res) {
-      return done(null, false, { message: "Incorrect username or password" });
+      return done(null, false, {
+        type: "SignUpMessage",
+        message: "Incorrect username or password",
+      });
     }
 
     return done(null, user);

@@ -78,8 +78,8 @@ exports.sign_up_post = [
 
 exports.login_get = (req, res, next) => {
   return res.render("login-form", {
-    title: "Login ",
-    error: req.session.messages,
+    title: "Login",
+    errors: req.flash("SignUpMessage"),
   });
 };
 

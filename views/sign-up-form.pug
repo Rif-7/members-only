@@ -27,7 +27,7 @@ block content
         button(type='submit') Sign Up
 
     if errors 
-      ul 
+      ul.error_field
        for error in errors 
          li!= error.msg
 

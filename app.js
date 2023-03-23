@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
+const flash = require("connect-flash");
 require("dotenv").config();
 
 var indexRouter = require("./routes/index");
@@ -24,6 +25,7 @@ db.on("error", console.error.bind(console, "MongoDB connection error: "));
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
 
+app.use(flash());
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
