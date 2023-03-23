@@ -8,9 +8,17 @@ exports.sign_up_get = (req, res, next) => {
 };
 
 exports.sign_up_post = [
-  body("username", "Username is required (4-18 characters) ")
+  body("username")
     .trim()
+    .custom(async (value) => {
+      const user = await User.findOne({ username: value });
+      if (user) {
+        return await Promise.reject("Username already taken");
+      }
+      return true;
+    })
     .isLength({ min: 4, max: 18 })
+    .withMessage("Username is required (4-18 characters) ")
     .escape(),
   body("firstname", "Firstname is required (3-18 characters) ")
     .trim()
