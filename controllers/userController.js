@@ -126,3 +126,31 @@ exports.membership_post = async (req, res, next) => {
     return next(err);
   }
 };
+
+exports.admin_get = (req, res, next) => {
+  if (!req.user) {
+    return res.redirect("/login");
+  }
+  return res.render("admin-form", { title: "Be an Admin" });
+};
+
+exports.admin_post = async (req, res, next) => {
+  if (!req.user) {
+    return res.redirect("/login");
+  }
+  if (req.body.code !== process.env.ADMIN_CODE) {
+    return res.render("admin-form", {
+      title: "Be an Admin",
+      error: "Incorrect Code",
+    });
+  }
+  try {
+    const user = req.user;
+    user.isAdmin = true;
+    await user.save();
+
+    return res.redirect("/");
+  } catch (err) {
+    return next(err);
+  }
+};
