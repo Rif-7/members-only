@@ -9,10 +9,7 @@ html
       if currentUser 
         ul 
           li.greeting Hello, #{currentUser.username}
-          if currentUser.isMember 
-            li
-              a(href="/revoke-membership") Revoke Membership 
-          else 
+          if !currentUser.isMember 
             li
               a(href="/membership") Be a Member
           
