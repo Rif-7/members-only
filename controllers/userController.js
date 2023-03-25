@@ -147,6 +147,7 @@ exports.admin_post = async (req, res, next) => {
   try {
     const user = req.user;
     user.isAdmin = true;
+    user.isMember = true;
     await user.save();
 
     return res.redirect("/");
