@@ -19,7 +19,7 @@ nav {
   color: black;
   padding-left: 40px;
   padding-right: 40px;
-  background-color: antiquewhite;
+  background-color: white;
   box-shadow: 5px 5px 10px;
 }
 
@@ -33,7 +33,14 @@ nav ul {
 nav ul li a {
   color: black;
   text-decoration: underline;
+}
 
+nav ul li a:hover {
+  color: rgb(0, 119, 255);
+}
+
+nav ul li .logout:hover {
+  color: red;
 }
 
 .greeting {
@@ -75,10 +82,13 @@ nav ul li a {
 .form_container button {
   font-family: "Bebas Neue", sans-serif;
   font-size: 22px;
+  background-color: #F4F4F9;
+  transition: 100ms;
 }
 
 .form_container button:hover {
-  background-color: #e7e7e7;
+  transform: translate(0px, -3px);
+  box-shadow: -3px 3px 3px black;
 }
 
 .form_group {
