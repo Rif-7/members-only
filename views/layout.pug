@@ -9,6 +9,8 @@ html
       if currentUser 
         ul 
           li.greeting Hello, #{currentUser.username}
+          li 
+            a(href="/new-post") New Post
           if !currentUser.isMember 
             li
               a(href="/membership") Be a Member

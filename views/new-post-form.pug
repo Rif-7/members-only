@@ -1,0 +1,20 @@
+extends layout 
+
+block content 
+    div.form_container
+        h1= title 
+        form(method='POST' action='').form_main
+          div.form_group
+            label(for='title') Title:
+            input#title(type="text" name="title" minlength='2' required='true' value=(post === undefined ? "" : post.title))
+          div.form_group
+            label(for='content') Text: 
+            textarea#content(name='content' minlength='2' rows='8' required='true' value=(post === undefined ? "" : post.text))
+        
+          button(type="submit") Post
+        
+
+        if errors
+          ul.error_field
+            for error in errors
+              li!= error.msg

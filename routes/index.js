@@ -23,4 +23,7 @@ router.post("/membership", userController.membership_post);
 router.get("/admin", userController.admin_get);
 router.post("/admin", userController.admin_post);
 
+router.get("/new-post", postController.new_post_get);
+router.post("/new-post", postController.new_post_post);
+
 module.exports = router;
