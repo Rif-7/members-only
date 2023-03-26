@@ -49,9 +49,26 @@ exports.new_post_post = [
 ];
 
 exports.post_list = async (req, res, next) => {
-  const posts = await Post.find().sort({ timestamp: -1 });
-  if (!req.user || !req.user.isMember) {
-    return res.render("home.pug", { posts: posts });
+  try {
+    if (!req.user || !req.user.isMember) {
+      const posts = await Post.find().sort({ timestamp: -1 });
+      return res.render("home.pug", { posts: posts });
+    }
+    const posts = await Post.find().sort({ timestamp: -1 }).populate("user");
+    return res.render("home-member", { posts: posts });
+  } catch (err) {
+    return next(err);
   }
-  res.send("TODO");
+};
+
+exports.delete_post = async (req, res, next) => {
+  if (!req.user || !req.user.isAdmin) {
+    return res.redirect("/");
+  }
+  try {
+    await Post.findByIdAndRemove(req.params.id);
+    return res.redirect("/");
+  } catch (err) {
+    return next(err);
+  }
 };

@@ -1,0 +1,16 @@
+extends layout 
+
+block content 
+ div.post_container
+    for post in posts 
+      div.post_card.post_card_member
+        div.user_details
+          span.username By #{post.user.username},
+          span.fullname #{post.user.fullname}
+          if currentUser && currentUser.isAdmin
+            a(href='/delete/'+ post.id).delete_post delete
+        div.title!= post.title
+        div.date #{post.timestamp_formatted} 
+        hr
+        div.content!= post.text
+        hr

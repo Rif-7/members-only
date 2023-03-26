@@ -24,4 +24,6 @@ router.post("/admin", userController.admin_post);
 router.get("/new-post", postController.new_post_get);
 router.post("/new-post", postController.new_post_post);
 
+router.get("/delete/:id", postController.delete_post);
+
 module.exports = router;

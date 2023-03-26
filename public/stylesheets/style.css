@@ -125,7 +125,7 @@ nav ul li .logout:hover {
   gap: 22px;
 }
 
-.post_card_normal {
+.post_card {
   grid-column: 2 / 2;
   font-family: "Roboto Mono", monospace;
   padding: 16px;
@@ -134,15 +134,38 @@ nav ul li .logout:hover {
   border-radius: 5px;
 }
 
-.post_card_normal .title {
+.post_card .title {
   font-size: 22px;
   font-weight: bold;
   margin-bottom: 6px;
 }
 
-.post_card_normal .date {
+.post_card .date {
   font-family: "Bebas Neue";
   font-style: italic;
   font-size: 18px;
   opacity: .8;
+}
+
+.post_card .user_details {
+  margin-top: -8px;
+  margin-bottom: 5px;
+  border-bottom: 3px solid white;
+  padding: 4px;
+  font-style: italic;
+
+  display: grid;
+  grid-template-columns: auto 1fr 75px;
+}
+
+.user_details .fullname {
+  margin-left: 6px;
+}
+
+.delete_post {
+  color: #3882F6;
+}
+
+.delete_post:hover {
+  text-decoration: underline;
 }
