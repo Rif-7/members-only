@@ -1,6 +1,8 @@
 # members-only
 
 Link: https://members-only-teok.onrender.com/
+Member account secret code: darthvader
+Admin account secret code: obiwankenobi
 
 Features:
 
