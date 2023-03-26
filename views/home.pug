@@ -1,0 +1,10 @@
+extends layout 
+
+block content 
+  div.post_container
+    for post in posts 
+      div.post_card_normal 
+        div.title #{post.title} 
+        div.date #{post.timestamp_formatted} 
+        hr
+        div.content #{post.text}

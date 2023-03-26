@@ -16,7 +16,7 @@ exports.new_post_post = [
     .escape(),
   body("content", "Text should have atleast 2 characters")
     .trim()
-    .isLength({ min: 2, max: 150 })
+    .isLength({ min: 2 })
     .escape(),
   async (req, res, next) => {
     if (!req.user) {
@@ -47,3 +47,11 @@ exports.new_post_post = [
     }
   },
 ];
+
+exports.post_list = async (req, res, next) => {
+  const posts = await Post.find().sort({ timestamp: -1 });
+  if (!req.user || !req.user.isMember) {
+    return res.render("home.pug", { posts: posts });
+  }
+  res.send("TODO");
+};

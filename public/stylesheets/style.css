@@ -116,3 +116,33 @@ nav ul li .logout:hover {
 .error_field {
   color: red;
 }
+
+.post_container {
+  padding: 30px;
+
+  display: grid;
+  grid-template-columns: 1fr minmax(500px, 1000px) 1fr;
+  gap: 22px;
+}
+
+.post_card_normal {
+  grid-column: 2 / 2;
+  font-family: "Roboto Mono", monospace;
+  padding: 16px;
+  background-color: #094074;
+  color: white;
+  border-radius: 5px;
+}
+
+.post_card_normal .title {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.post_card_normal .date {
+  font-family: "Bebas Neue";
+  font-style: italic;
+  font-size: 18px;
+  opacity: .8;
+}
