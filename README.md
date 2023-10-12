@@ -1,12 +1,12 @@
-# members-only
+# Members-Only
 
-Link: https://members-only-teok.onrender.com/
+An exclusive clubhouse where members can write anonymous posts. Normal users can only view the post while members and admins can view the authors and have other privileges.
 
-Member account secret code: darthvader
+    Member account secret code: darthvader
 
-Admin account secret code: obiwankenobi
+    Admin account secret code: obiwankenobi
 
-Features:
+## Features:
 
   - Create Accounts.
   - Session based logins.
@@ -14,7 +14,7 @@ Features:
   - Normal, Member and Admin accounts with access to different features.
  
  
- Used:
+ ## Frameworks And Technologies Used:
  
    - Nodejs
    - Expressjs
@@ -22,7 +22,10 @@ Features:
    - Passportjs for authentication
    - Pug as the templating language
    - Bcryptjs to create and compare password hashes
-   
+
+
+## Live: 
+https://members-only-teok.onrender.com/
    
  
  
